@@ -8,25 +8,30 @@ USER $NB_UID
 COPY lab /home/$NB_USER/.jupyter/lab
 
 RUN conda install --quiet --yes \
-    'conda-forge::numpy' \
-    'conda-forge::matplotlib' \
-    'conda-forge::pandas' \
-    'conda-forge::scipy' \
-    'conda-forge::seaborn' \
-    'conda-forge::xlrd' \
-    'conda-forge::psutil' \
-    'conda-forge::autopep8' \
-    'conda-forge::pandoc' \
-    'conda-forge::ipywidgets' \
-    'conda-forge::h5py' \
+    'numpy' \
+    'matplotlib' \
+    'pandas' \
+    'scipy' \
+    'seaborn' \
+    'xlrd' \
+    'psutil' \
+    'autopep8' \
+    'pandoc' \
+    'ipywidgets' \
+    'h5py'
+
+RUN conda install --quiet --yes \
     'conda-forge::jupyter_contrib_nbextensions' \
     'conda-forge::xeus-python' \
-    'conda-forge::moviepy' \
+    'conda-forge::moviepy'
+
+RUN conda install --quiet --yes \
     'plotly::plotly' \
-    'plotly::python-kaleido' \
-    && \
-    conda clean --all -f -y && \
-    jupyter labextension install @ryantam626/jupyterlab_code_formatter && \
+    'plotly::python-kaleido'
+
+RUN conda clean --all -f -y
+
+RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter && \
     pip install jupyterlab_code_formatter && \
     jupyter serverextension enable --py jupyterlab_code_formatter && \
     jupyter lab build --dev-build=False && \
