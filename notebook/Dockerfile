@@ -8,17 +8,17 @@ USER $NB_UID
 COPY lab /home/$NB_USER/.jupyter/lab
 
 RUN conda install --quiet --yes \
-    'numpy' \
-    'matplotlib' \
-    'pandas' \
-    'scipy' \
-    'seaborn' \
-    'xlrd' \
-    'psutil' \
-    'autopep8' \
-    'pandoc' \
-    'ipywidgets' \
-    'h5py' \
+    'conda-forge::numpy' \
+    'conda-forge::matplotlib' \
+    'conda-forge::pandas' \
+    'conda-forge::scipy' \
+    'conda-forge::seaborn' \
+    'conda-forge::xlrd' \
+    'conda-forge::psutil' \
+    'conda-forge::autopep8' \
+    'conda-forge::pandoc' \
+    'conda-forge::ipywidgets' \
+    'conda-forge::h5py' \
     'conda-forge::jupyter_contrib_nbextensions' \
     'conda-forge::xeus-python' \
     'conda-forge::moviepy' \
