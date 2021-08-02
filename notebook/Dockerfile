@@ -22,6 +22,7 @@ RUN conda install --quiet --yes \
     'h5py' \
     'conda-forge::jupyter_contrib_nbextensions' \
     'conda-forge::xeus-python' \
+    'conda-forge::moviepy' \
     && \
     conda clean --all -f -y && \
     # Activate ipywidgets extension in the environment that runs the notebook server
