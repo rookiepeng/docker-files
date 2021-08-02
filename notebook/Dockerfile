@@ -26,8 +26,8 @@ RUN conda install --quiet --yes \
     'conda-forge::moviepy'
 
 RUN conda install --quiet --yes \
-    'plotly::plotly' \
-    'plotly::python-kaleido'
+    'conda-forge::plotly' \
+    'conda-forge::python-kaleido'
 
 RUN conda clean --all -f -y
 
