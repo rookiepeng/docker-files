@@ -14,7 +14,6 @@ RUN conda install --quiet --yes \
     'scipy' \
     'seaborn' \
     'xlrd' \
-    'plotly' \
     'psutil' \
     'autopep8' \
     'pandoc' \
@@ -23,32 +22,20 @@ RUN conda install --quiet --yes \
     'conda-forge::jupyter_contrib_nbextensions' \
     'conda-forge::xeus-python' \
     'conda-forge::moviepy' \
+    'plotly::plotly' \
+    'plotly::python-kaleido' \
     && \
     conda clean --all -f -y && \
-    # Activate ipywidgets extension in the environment that runs the notebook server
-    jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
-    jupyter nbextension enable code_prettify/autopep8 && \
-    jupyter nbextension enable collapsible_headings/main && \
-    jupyter nbextension enable hide_header/main && \
-    # Also activate ipywidgets extension for JupyterLab
-    # Check this URL for most recent compatibilities
-    # https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
-    # jupyter labextension install @jupyter-widgets/jupyterlab-manager@^1.0.1 --no-build && \
-    # jupyter labextension install jupyterlab_bokeh@1.0.0 --no-build && \
     jupyter labextension install @ryantam626/jupyterlab_code_formatter && \
     pip install jupyterlab_code_formatter && \
     jupyter serverextension enable --py jupyterlab_code_formatter && \
     jupyter lab build --dev-build=False && \
     npm cache clean --force && \
-    rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
-    rm -rf /home/$NB_USER/.cache/yarn && \
-    rm -rf /home/$NB_USER/.node-gyp && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
-
-# for python-kaleido
-RUN conda install --quiet --yes -c plotly python-kaleido
-RUN conda clean --all -f -y
+    rm -rf "$CONDA_DIR/share/jupyter/lab/staging" && \
+    rm -rf "/home/$NB_USER/.cache/yarn" && \
+    rm -rf "/home/$NB_USER/.node-gyp" && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
 
 # Import matplotlib the first time to build the font cache.
 ENV XDG_CACHE_HOME /home/$NB_USER/.cache/
