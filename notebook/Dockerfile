@@ -35,7 +35,6 @@ RUN conda install --quiet --yes \
     # https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
     # jupyter labextension install @jupyter-widgets/jupyterlab-manager@^1.0.1 --no-build && \
     # jupyter labextension install jupyterlab_bokeh@1.0.0 --no-build && \
-    jupyter labextension install jupyterlab-plotly && \
     jupyter labextension install @ryantam626/jupyterlab_code_formatter && \
     pip install jupyterlab_code_formatter && \
     jupyter serverextension enable --py jupyterlab_code_formatter && \
@@ -47,7 +46,7 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-# for plotly-orca
+# for python-kaleido
 RUN conda install --quiet --yes -c plotly python-kaleido
 RUN conda clean --all -f -y
 
